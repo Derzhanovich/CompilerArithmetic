@@ -1,0 +1,106 @@
+group javaTemplate;
+
+program(functions,  globals) ::= <<
+public class target_code
+{
+
+static java.util.Scanner sc = new java.util.Scanner(System.in);
+
+<globals; separator="\n">
+
+
+
+<functions; separator="\n">
+
+}
+>>
+
+
+functions(type, id, arglist, block) ::=
+<<
+public static <type> <id>(<arglist; separator=",">)
+{
+  <block; separator="\n">
+}   
+>>
+
+main(block) ::= << 
+public static void main(String[] args)
+{
+     <block; separator="\n">
+
+}
+>>
+
+fun_call( id, args) ::= <<  <id>( <args; separator= ","> ) >>
+
+
+
+if_template(expr, ifblock, elseblock) ::= <<
+if(<expr>)
+{
+  <ifblock; separator="\n">
+  
+}
+<elseblock>
+>>
+
+else_template(elseblock)::=<<
+else
+{
+  <elseblock; separator="\n">
+}
+>>
+
+for_template(atom1, atom2, atom3, block) ::=
+<<
+for(<atom1>; <atom2>; <atom3>)
+{
+    <block; separator="\n">
+}
+>>
+
+while(expr, block)::=
+<<
+while(<expr>)
+{
+  <block; separator="\n">
+}
+>>
+
+dowhile(expr, block)::=
+<<
+do 
+{
+  <block; separator="\n">
+}
+while(<expr>)
+>>
+
+
+
+parametr(type,id) ::= "<type> <id>"
+write(id)  ::= " System.out.println(<id>) "
+print(text)  ::= <<System.out.println("<text>") >>
+readInt(id) ::=  "<id> = sc.nextInt() "
+readDouble(id) ::=  " <id>  = sc.nextDouble()"
+change_type(idone, type, idtwo) ::= "<idone> = (<type>)<idtwo>"
+return(exp) ::= "return <exp> "
+break() ::= "break "
+operation(left, right) ::= "<left> <right>"
+logic_operation(neg, left, right) ::= "<neg> <left> <right>"
+str( value ) ::= "<value> "
+
+
+pow(a, b) ::= "(double)Math.pow(<a>,<b>)"
+sqrt(x) ::= "Math.sqrt(<x>)"
+function_call(id, args) ::= "<id>(<args>)"
+parren_exp(exp) ::= "(<exp>)"
+
+
+global(init)::= "static <init>;" 
+var_dec(type, id , init) ::= "  <type> <id> <init>  "
+var_init(atom) ::= "= <atom> "
+
+
+/////////////////////////////////////////
